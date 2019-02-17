@@ -2,38 +2,14 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const Campground = require('./models/campgrounds');
+const seedDB = require('./seeds');
 
-mongoose.connect(
-  'mongodb://localhost/yelp_camp',
-  { useNewUrlParser: true }
-);
+mongoose.connect('mongodb://localhost/yelp_camp', { useNewUrlParser: true });
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-//Schema setup
-const campgroundSchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  description: String
-});
-
-const Campground = mongoose.model('Campground', campgroundSchema);
-
-// Campground.create(
-//   {
-//     name: 'Granite Hill',
-//     image:
-//       'https://images.unsplash.com/photo-1534880606858-29b0e8a24e8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80',
-//     description: 'A huge granite hill with no amenaties but greate view!'
-//   },
-//   (err, campground) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log(campground);
-//     }
-//   }
-// );
+//seedDB();
 
 app.get('/', (req, res) => {
   res.render('landing');
@@ -78,14 +54,17 @@ app.get('/campgrounds/new', (req, res) => {
 //Show - shows more info about one campground
 app.get('/campgrounds/:id', (req, res) => {
   //find campgournd with provided ID
-  Campground.findById(req.params.id, (err, foundCampground) => {
-    if (err) {
-      console.log(err);
-    } else {
-      //render show template with that campground
-      res.render('show', { campground: foundCampground });
-    }
-  });
+  Campground.findById(req.params.id)
+    .populate('comments')
+    .exec((err, foundCampground) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(foundCampground);
+        //render show template with that campground
+        res.render('show', { campground: foundCampground });
+      }
+    });
 });
 
 app.listen(3000, () => {

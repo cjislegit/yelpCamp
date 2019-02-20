@@ -7,19 +7,22 @@ const data = [
     name: 'Clouds Rest',
     image:
       'https://images.unsplash.com/photo-1526491109672-74740652b963?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-    description: 'Lots of clouds!'
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus similique sed enim voluptatem voluptatibus neque est nostrum consequatur, asperiores maxime illo quam possimus, omnis at provident voluptate ipsum autem. Voluptatum.'
   },
   {
     name: 'Star House',
     image:
       'https://images.unsplash.com/photo-1519708495087-ca1b71df408c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1356&q=80',
-    description: 'Lots of stars!'
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus similique sed enim voluptatem voluptatibus neque est nostrum consequatur, asperiores maxime illo quam possimus, omnis at provident voluptate ipsum autem. Voluptatum.'
   },
   {
     name: 'Snow Crest',
     image:
       'https://images.unsplash.com/photo-1520963959303-a5cc3bdf9260?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-    description: 'Lots of snow!'
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus similique sed enim voluptatem voluptatibus neque est nostrum consequatur, asperiores maxime illo quam possimus, omnis at provident voluptate ipsum autem. Voluptatum.'
   }
 ];
 

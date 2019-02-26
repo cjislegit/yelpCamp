@@ -16,6 +16,20 @@ app.use(express.static(__dirname + '/public'));
 
 //seedDB();
 
+//Passport Configuration
+app.use(
+  require('express-session')({
+    secret: 'Harley is beauty, Harley is grace',
+    resave: false,
+    saveUninitialized: false
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.get('/', (req, res) => {
   res.render('landing');
 });
@@ -107,6 +121,27 @@ app.post('/campgrounds/:id/comments', (req, res) => {
         }
       });
     }
+  });
+});
+
+//Auth Routes
+
+//Show register form
+app.get('/register', (req, res) => {
+  res.render('register');
+});
+
+//Handle Sign up
+app.post('/register', (req, res) => {
+  var newUser = new User({ username: req.body.username });
+  User.register(newUser, req.body.password, (err, user) => {
+    if (err) {
+      console.log(err);
+      return res.render('register');
+    }
+    passport.authenticate('local')(req, res, () => {
+      res.redirect('/campgrounds');
+    });
   });
 });
 
